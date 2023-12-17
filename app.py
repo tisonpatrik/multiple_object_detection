@@ -1,7 +1,7 @@
 import streamlit as st
 
 from src.video_player import VideoPlayer
-from src.video_utils import get_video_fps, save_temporary_video
+from src.video_utils import save_temporary_video
 
 
 def main():
@@ -26,8 +26,7 @@ def handle_replay(player, uploaded_file):
 
     if replay_button_clicked or st.session_state.replay:
         file_path = save_temporary_video(uploaded_file)
-        time_per_frame = get_video_fps(file_path)
-        player.display_video_frames(file_path, time_per_frame)
+        player.display_video_frames(file_path)
         st.session_state.replay = False
 
 
