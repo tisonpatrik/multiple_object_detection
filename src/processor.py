@@ -1,28 +1,28 @@
+import numpy as np
 import supervision as sv
-from supervision.draw.color import ColorPalette
 from ultralytics import YOLO
+
+CLASS_ID = [2, 3, 5, 7]
 
 
 class MediaProcessor:
     def __init__(self):
         self.model = YOLO("yolov8n.pt")
-        self.class_names_dict = self.model.model.names
-        pass
+        self.tracker = sv.ByteTrack()
+        self.box_annotator = sv.BoundingBoxAnnotator()
+        self.label_annotator = sv.LabelAnnotator()
 
     def process_video_frame(self, frame):
-        results = self.model(frame)
-        box_annotator = sv.BoundingBoxAnnotator(
-            color=ColorPalette.default(),  # Use the default color palette
-            thickness=4,
-        )
-        detections = sv.Detections(
-            xyxy=results[0].boxes.xyxy.cpu().numpy(),
-            confidence=results[0].boxes.conf.cpu().numpy(),
-            class_id=results[0].boxes.cls.cpu().numpy().astype(int),
-        )
+        results = self.model(frame)[0]
+        detections = sv.Detections.from_ultralytics(results)
+        detections = self.tracker.update_with_detections(detections)
         labels = [
-            f"{self.class_names_dict[class_id]} {conf:0.2f}"
-            for class_id, conf in zip(detections.class_id, detections.confidence)
+            f"#{tracker_id} {results.names[class_id]}"
+            for class_id, tracker_id in zip(detections.class_id, detections.tracker_id)
         ]
-        processed_frame = box_annotator.annotate(scene=frame, detections=detections)
-        return processed_frame
+        annotated_frame = self.box_annotator.annotate(
+            frame.copy(), detections=detections
+        )
+        return self.label_annotator.annotate(
+            annotated_frame, detections=detections, labels=labels
+        )
