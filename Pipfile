@@ -8,6 +8,7 @@ numpy = "*"
 ultralytics = "*"
 opencv-python = "*"
 supervision = "*"
+streamlit = "*"
 
 [dev-packages]
 

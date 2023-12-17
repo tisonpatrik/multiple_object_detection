@@ -2,8 +2,11 @@ import argparse
 
 import cv2
 import numpy as np
+import streamlit as st
 import supervision as sv
 from ultralytics import YOLO
+
+from camera_setup import setup_camera
 
 ZONE_POLYGON = np.array([[0, 0], [0.5, 0], [0.5, 1], [0, 1]])
 
@@ -18,15 +21,9 @@ def parse_arguments() -> argparse.Namespace:
 def main():
     args = parse_arguments()
     frame_width, frame_height = args.webcam_resolution
-
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
-
+    cap = setup_camera(frame_width, frame_height)
     model = YOLO("yolov8l.pt")
-
     box_annotator = sv.BoxAnnotator(thickness=2, text_thickness=2, text_scale=1)
-
     zone_polygon = (ZONE_POLYGON * np.array(args.webcam_resolution)).astype(int)
     zone = sv.PolygonZone(
         polygon=zone_polygon, frame_resolution_wh=tuple(args.webcam_resolution)
@@ -34,6 +31,7 @@ def main():
     zone_annotator = sv.PolygonZoneAnnotator(
         zone=zone, color=sv.Color.red(), thickness=2, text_thickness=4, text_scale=2
     )
+    st.title("Real-Time Object Detection with YOLO")
 
     while True:
         ret, frame = cap.read()
