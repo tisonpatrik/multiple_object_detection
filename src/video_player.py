@@ -12,9 +12,16 @@ class VideoPlayer:
     def __init__(self):
         self.processor = MediaProcessor()
 
-    def display_video_frames(self, video_path, fps):
+    def display_video_frames(
+        self, video_path, time_per_frame, stride=1, start=0, end=None
+    ):
         frame_placeholder = st.empty()
-        for frame in get_video_frames_generator(video_path):
+
+        frame_generator = get_video_frames_generator(
+            source_path=video_path, stride=stride, start=start, end=end
+        )
+
+        for frame in frame_generator:
             processed_frame = self.processor.process_video_frame(frame)
 
             # Convert the processed frame to a format suitable for display
@@ -23,4 +30,4 @@ class VideoPlayer:
             frame_placeholder.image(frame_pil, channels="RGB")
 
             # Introduce delay to match the video's frame rate
-            time.sleep(1.0 / fps)
+            time.sleep(time_per_frame)
