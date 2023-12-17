@@ -1,0 +1,35 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "/home/patrik/.local/share/virtualenvs/multiple_object_detection-aPVWiJiH",
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.black-formatter",
+            "editor.formatOnSave": true
+        },
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.diagnosticMode": "workspace",
+        "python.testing.pytestEnabled": true,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "isort.args": [
+            "--profile",
+            "black"
+        ],
+        "python.languageServer": "Pylance",
+        "python.analysis.logLevel": "Information",
+        "vsintellicode.features.python.deepLearning": "disabled",
+        "python.analysis.inlayHints.variableTypes": false,
+        "python.analysis.persistAllIndices": false,
+        "python.missingPackage.severity": "Information",
+        "python.analysis.useLibraryCodeForTypes": false,
+        "python.analysis.addImport.exactMatchOnly": true,
+        "python.analysis.typeCheckingMode": "basic",
+    }
+}
