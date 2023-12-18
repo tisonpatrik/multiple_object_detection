@@ -5,7 +5,8 @@ from src.video_utils import save_temporary_video
 
 
 def main():
-    player = VideoPlayer()
+    st.sidebar.title("Menu")
+
     uploaded_file = st.file_uploader("Choose a video...", type=["mp4"])
 
     if uploaded_file is not None:
@@ -18,10 +19,11 @@ def main():
             st.session_state.replay = True  # Set replay to True for new file
 
         st.write("Uploaded video")
-        handle_replay(player, uploaded_file)
+        handle_replay(uploaded_file)
 
 
-def handle_replay(player, uploaded_file):
+def handle_replay(uploaded_file):
+    player = VideoPlayer()
     replay_button_clicked = st.button("Replay Video")
 
     if replay_button_clicked or st.session_state.replay:
