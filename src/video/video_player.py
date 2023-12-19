@@ -3,7 +3,7 @@ import streamlit as st
 from PIL import Image
 from supervision.utils.video import get_video_frames_generator
 
-from src.processor import MediaProcessor
+from src.video.processor import MediaProcessor
 
 
 class VideoPlayer:

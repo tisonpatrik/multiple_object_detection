@@ -1,7 +1,7 @@
 import streamlit as st
 
-from src.video_player import VideoPlayer
-from src.video_utils import save_temporary_video
+from src.video.video_player import VideoPlayer
+from src.video.video_utils import save_temporary_video
 
 
 class ReplayHandler:
