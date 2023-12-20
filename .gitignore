@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 data
 yolov8n.pt
+config.json
+config.yaml
+multiple_object_detection.code-workspace
