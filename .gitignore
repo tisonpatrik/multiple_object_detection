@@ -163,3 +163,4 @@ yolov8n.pt
 config.json
 config.yaml
 multiple_object_detection.code-workspace
+runs
