@@ -1,7 +1,6 @@
 import streamlit as st
 
 from src.pages.analyze_page import AnalyzePage
-from src.pages.train_page import TrainPage
 
 
 def main():
@@ -16,18 +15,12 @@ def main():
         # Sidebar buttons for page navigation
         if st.button("Analyze"):
             st.session_state.current_page = "Analyze"
-        if st.button("Train"):
-            st.session_state.current_page = "Train"
 
     # Instantiate page classes
     analyze_page = AnalyzePage()
-    train_page = TrainPage()
-
     # Render the appropriate page based on current page
     if st.session_state.current_page == "Analyze":
         analyze_page.render()
-    elif st.session_state.current_page == "Train":
-        train_page.train()
 
 
 if __name__ == "__main__":
