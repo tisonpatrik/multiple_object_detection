@@ -1,18 +1,18 @@
+import os
+
 import supervision as sv
 from ultralytics import YOLO
-
-CLASS_ID = [2, 3, 5, 7]
 
 
 class MediaProcessor:
     def __init__(self):
-        self.model = YOLO("yolov8n.pt")
         self.tracker = sv.ByteTrack()
         self.box_annotator = sv.BoundingBoxAnnotator()
         self.label_annotator = sv.LabelAnnotator()
 
     def process_video_frame(self, frame):
-        results = self.model(frame)[0]
+        model = YOLO(self._determine_model_path())
+        results = model(frame)[0]
         detections = sv.Detections.from_ultralytics(results)
         detections = self.tracker.update_with_detections(detections)
         labels = [
@@ -24,4 +24,11 @@ class MediaProcessor:
         )
         return self.label_annotator.annotate(
             annotated_frame, detections=detections, labels=labels
+        )
+
+    def _determine_model_path(self):
+        return (
+            "runs/detect/train/weights/best.pt"
+            if os.path.exists("runs/detect/train/weights/best.pt")
+            else "yolov8n.pt"
         )
