@@ -13,14 +13,14 @@ This application was developed and tested on a Linux/WSL2 environment. Functiona
 
 1. Operating System: Linux / WSL2
 2. Python 3.10.12: We recommend using `pyenv` for managing Python versions. If `pyenv` is not installed, you can install it following the instructions [here](https://github.com/pyenv/pyenv#installation). After installing `pyenv`, you can install Python 3.10.12 using `pyenv install 3.10.12`.
-3. Pipenv: If not installed, you can install it using `pip install pipenv`.
+3. Pipenv: If not installed, you can install it using pip install pipenv.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/username/multiple_object_detection.git`
-2. Navigate to the project directory: `cd multiple_object_detection`
-3. Set the local Python version to 3.10.12 using `pyenv local 3.10.12`.
-4. Create a new virtual environment using pipenv: `pipenv --python $(pyenv which python)`
+1. Clone the repository
+2. Navigate to the project directory
+3. Set the local Python version to 3.10.12
+4. Create a new virtual environment using pipenv
 5. Install the required dependencies: `pipenv install`
 6. Ensure that `Jupyter Notebook` and `CUDA 12.1` are installed and properly configured on your system.
 
