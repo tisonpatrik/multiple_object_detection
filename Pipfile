@@ -9,11 +9,12 @@ ultralytics = "*"
 opencv-python = "*"
 supervision = "*"
 streamlit = "*"
-matplotlib = "*"
 nbconvert = "*"
 torch = "*"
 torchvision = "*"
 torchaudio = "*"
+matplotlib = "*"
+scikit-learn = "*"
 
 [dev-packages]
 ipykernel = "*"

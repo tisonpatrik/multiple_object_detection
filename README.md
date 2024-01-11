@@ -1,11 +1,4 @@
-## Dataset
-
-The dataset used for this project, especially for data preprocessing, can be downloaded from [here](https://www.kaggle.com/datasets/biancaferreira/african-wildlife). This dataset contains images of African wildlife and was instrumental in the development and testing of this multiple object detection system.
-
-
-## Installation
-
-Follow these steps to install the project:
+# Multiple object detection
 
 ## Prerequisites
 
@@ -13,56 +6,54 @@ This application was developed and tested on a Linux/WSL2 environment. Functiona
 
 1. Operating System: Linux / WSL2
 2. Python 3.10.12: We recommend using `pyenv` for managing Python versions. If `pyenv` is not installed, you can install it following the instructions [here](https://github.com/pyenv/pyenv#installation). After installing `pyenv`, you can install Python 3.10.12 using `pyenv install 3.10.12`.
-3. Pipenv: If not installed, you can install it using pip install pipenv.
+3. Recomended enviroment manager is [pipenv](https://pipenv.pypa.io/en/latest/), but its not mandatory.
+4. Follow this instructions
 
-## Installation
+## Try detection with app
+
+### Installation and usage
 
 1. Clone the repository
 2. Navigate to the project directory
 3. Set the local Python version to 3.10.12
-4. Create a new virtual environment using pipenv
-5. Install the required dependencies: `pipenv install`
-6. Ensure that `Jupyter Notebook` and `CUDA 12.1` are installed and properly configured on your system.
+4. Create and activate new virtual environment
+5. Install the required dependencies: `pipenv install` or `pip install -r requirements.txt`
+6. To run the application for video processing: `streamlit run app.py`
 
-## Configuration
 
-For data preprocessing and model training, you need to have a `config.json` file in the root of the project with the following structure:
+## Try train your own model
 
-```json
-{
-    "path": "path/to/raw/data",
-    "labeltrainpath": "path/to/train/labels",
-    "imgtrainpath": "path/to/train/images",
-    "labeltestpath": "path/to/test/labels",
-    "imgtestpath": "path/to/test/images",
-    "labelvalpath": "path/to/validation/labels",
-    "imgvalpath": "path/to/validation/images"
-}
-```
-Replace the path/to/... placeholders with the actual paths on your system. Here's what each field represents:
+At first, you need have collected some dataset. How should looks annotations, check official docs from [ultralytics](https://docs.ultralytics.com/datasets/detect/#ultralytics-yolo-format). Images do not have to be in the same resolution, or format. The only thing you need to pay attention to is that a file with annotations (dog.txt) is available in the same folder for each image (dog.png) 
 
-`path`: The path to the raw data folder.
-`labeltrainpath`: The path to the folder where the training labels will be stored.
-`imgtrainpath`: The path to the folder where the training images will be stored.
-`labeltestpath`: The path to the folder where the test labels will be stored.
-`imgtestpath`: The path to the folder where the test images will be stored.
-`labelvalpath`: The path to the folder where the validation labels will be stored.
-`imgvalpath`: The path to the folder where the validation images will be stored.
+### Dataset
 
-This configuration file is used to specify the locations of the raw data and where to store the processed data for training, testing, and validation.
+1. Create in root directory this structure: `data/dataset`
+2. Inside of `dataset` directory add images (supported formats are `jpg` and `png`) and anotations (`txt`) files
+3. Into `data` directory insert `obj.names` file
+3. Be sure that you can run `Jupyter Notebooks` on your machine
+4. Open `data_processing.ipynb` and run it.
+5. Script will create some new directories in `data` directory and will do some magic there
 
-## Usage
+### Training
 
-1. Activate the virtual environment: `pipenv shell`
+1. Be sure that your machine is supported and you have installed `CUDA 12.1`.
+2. Run `train.py` script
+3. Go to sleep, or make coffee bcs this will take some time....
+4. If training will be success, new model will be created and sreamlit app will find it and will use this model as default. 
 
-2. For data pre-processing, run Jupyter Notebook in the root of the project.
-
-3. For training a new model, run the `run.py` file in the root of the project: `python run.py`
-
-4. To run the application for video processing: `streamlit run app.py`
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request.
+
+### Setting Up in Visual Studio Code
+
+If you are using Visual Studio Code as your IDE, you may need to specify the path to the Python interpreter in the `.code-workspace` file..
+
+Here's how you can do it:
+
+1. Open the `.code-workspace` file in your workspace.
+2. Look for the `settings` object
+3. Inside the `settings` object, add or modify the `python.defaultInterpreterPath` property. The value should be the absolute path to the Python interpreter you want to use.
 
 ## License
 This project is licensed under the MIT License.
