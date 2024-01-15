@@ -10,7 +10,6 @@ class ImageRender:
     def __init__(self):
         self.model_processor = ModelProcessor()
         self.video_annotator = FrameAnnotator()
-        self.image_placeholder = st.empty()
 
     def display_image(self, image_path):
         # Load the image
@@ -23,4 +22,6 @@ class ImageRender:
         # Convert the processed image to a format suitable for display
         image_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
         image_pil = Image.fromarray(image_rgb)
-        self.image_placeholder.image(image_pil, channels="RGB")
+
+        # Display the image using Streamlit's image display method, ensuring it fits the column width
+        st.image(image_pil, channels="RGB")

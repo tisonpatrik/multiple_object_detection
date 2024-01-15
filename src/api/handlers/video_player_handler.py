@@ -2,8 +2,8 @@ import logging
 
 import streamlit as st
 
-from src.video.video_player import VideoPlayer
 from src.utils.file_utils import save_temporary_file
+from src.video.video_player import VideoPlayer
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -14,7 +14,7 @@ class VideoPlayerHandler:
     def __init__(self):
         self.player = VideoPlayer()
 
-    def handle_replay(self, uploaded_file):
+    def handle_video(self, uploaded_file):
         try:
             replay_button_clicked = st.button("Replay Video")
 

@@ -29,5 +29,6 @@
         "python.analysis.useLibraryCodeForTypes": false,
         "python.analysis.addImport.exactMatchOnly": true,
         "python.analysis.typeCheckingMode": "basic",
+        "ros.distro": "noetic",
     }
 }

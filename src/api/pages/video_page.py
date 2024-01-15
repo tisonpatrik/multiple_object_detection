@@ -19,4 +19,4 @@ class VideoPlayerPage:
                 st.session_state.replay = True
 
             st.write("Uploaded video")
-            self.replay_handler.handle_replay(uploaded_file)
+            self.replay_handler.handle_video(uploaded_file)

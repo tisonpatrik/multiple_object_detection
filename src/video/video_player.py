@@ -3,8 +3,8 @@ import streamlit as st
 from PIL import Image
 from supervision.utils.video import get_video_frames_generator
 
-from src.frame_processing.model_processor import ModelProcessor
 from src.frame_processing.frame_annotator import FrameAnnotator
+from src.frame_processing.model_processor import ModelProcessor
 
 
 class VideoPlayer:
@@ -14,6 +14,13 @@ class VideoPlayer:
         self.frame_placeholder = st.empty()
 
     def display_video_frames(self, video_path, stride=1, start=0, end=None):
+        # Create a three-column layout
+        col1, col2, col3 = st.columns([1, 2, 1])
+
+        # Use the middle column for the video
+        with col2:
+            self.frame_placeholder = st.empty()
+
         frame_generator = get_video_frames_generator(
             source_path=video_path, stride=stride, start=start, end=end
         )
@@ -22,7 +29,9 @@ class VideoPlayer:
             try:
                 frame = next(iter(frame_generator))
                 processed_frame = self.model_processor.process_frame(frame)[0]
-                annotated_frame = self.video_annotator.annotate_frame(frame, processed_frame)
+                annotated_frame = self.video_annotator.annotate_frame(
+                    frame, processed_frame
+                )
 
                 # Convert the processed frame to a format suitable for display
                 frame_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
