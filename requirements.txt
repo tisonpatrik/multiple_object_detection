@@ -1,0 +1,15 @@
+numpy
+ultralytics
+opencv-python
+supervision
+streamlit
+nbconvert
+torch
+torchvision
+torchaudio
+matplotlib
+scikit-learn
+pyyaml
+
+# Development packages
+ipykernel
